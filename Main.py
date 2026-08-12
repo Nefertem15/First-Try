@@ -75,7 +75,6 @@ def create_asteroids():
             "size": random.uniform(0.5, 1.5),
             "rotation": random.uniform(0, 360)
         }
-
         asteroids.append(asteroid)
 
 def spawn_enemy():
@@ -240,21 +239,17 @@ while not window_should_close():
         for enemy in enemies:
             enemy_position = enemy["position"]
             dx = player_position.x - enemy_position.x
-
             dz = player_position.z - enemy_position.z
-
             distance = math.sqrt(dx * dx + dz * dz)
 
             if distance > 0:
                 enemy_position.x += dx / distance * enemy["speed"] * dt
-
                 enemy_position.z += dz / distance * enemy["speed"] * dt
 
             # Enemy hits player
             if distance_3d(enemy_position, player_position) < 1.3:
                 player_health -= 25
                 create_explosion(enemy_position)
-
                 enemy["position"] = Vector3(random.uniform(-world_size, world_size), 1, random.uniform(-world_size, world_size))
 
         # BULLET VS ENEMY
